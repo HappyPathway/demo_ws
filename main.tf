@@ -4,14 +4,13 @@ variable "vault_token" {}
 variable "vault_addr" {}
 variable "oauth_token" {}
 variable "github_org" {}
-variable "oauth_token" {}
 variable "organization" {}
 variable "repo_name" {}
 
 
 module "demo_workspace" {
   source  = "app.terraform.io/Darnold-Hashicorp/demo-workspace/tfe"
-  version = "1.0.1"
+  version = "1.2.0"
 
   github_org = "${var.github_org}"
   oauth_token = "${var.oauth_token}"
@@ -22,4 +21,8 @@ module "demo_workspace" {
 	vault_vars = true
   vault_addr = "${var.vault_addr}"
   vault_token = "${var.vault_token}"
+}
+
+output "workspace_id" {
+  value = "${module.demo_workspace.workspace_id}"
 }
